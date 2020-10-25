@@ -28,3 +28,12 @@ SEQ=00000 # or 00001, ..., 00020
 LOCATION=left # or 'right'
 wget "http://rpg.ifi.uzh.ch/datasets/DSEC/$SEQ/events/$LOCATION/data.raw"
 ```
+
+### Lidar Data
+
+Each file contains lidar scan data in rosbag format. The raw scan data is saved in the `/velodyne_packets` topic of the bag.
+
+```bash
+SEQ=00000 # or 00001, ..., 00020
+wget "http://rpg.ifi.uzh.ch/datasets/DSEC/$SEQ/lidar/velodyne.bag"
+```
