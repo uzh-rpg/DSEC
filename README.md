@@ -1,9 +1,16 @@
 # DSEC
 
+<p align="center">
+   <img src="http://rpg.ifi.uzh.ch/img/datasets/dsec/setup_description.png" width="300"/>
+   <img src="http://rpg.ifi.uzh.ch/img/datasets/dsec/dataset_example.png" width="300"/>
+</p>
+
 DSEC is a hybrid stereo event camera and video camera dataset in driving scenarios.
 
+**Under Construction**
+
 This repository currently contains links to *raw data* of a subset of the DSEC dataset.
-Download instructions for the full dataset will be made available upon publication of the dataset.
+The full dataset will be made available upon publication of the dataset.
 
 ## Download Raw Data
 
