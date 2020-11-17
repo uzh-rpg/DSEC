@@ -28,12 +28,12 @@ wget "http://rpg.ifi.uzh.ch/datasets/DSEC/$SEQ/images/$LOCATION/debayer8bit.7z"
 
 ### Event Data
 
-Each file contains raw event data in Prophesee format. "left" or "right" refers to the left or right event camera of the stereo pair.
+Each file contains raw event data in HDF5 format. "left" or "right" refers to the left or right event camera of the stereo pair.
 
 ```bash
 SEQ=00000 # or 00001, ..., 00020
 LOCATION=left # or 'right'
-wget "http://rpg.ifi.uzh.ch/datasets/DSEC/$SEQ/events/$LOCATION/data.raw"
+wget "http://rpg.ifi.uzh.ch/datasets/DSEC/$SEQ/events/$LOCATION/events.h5"
 ```
 
 ### Lidar Data
@@ -44,3 +44,22 @@ Each file contains lidar scan data in rosbag format. The raw scan data is saved 
 SEQ=00000 # or 00001, ..., 00020
 wget "http://rpg.ifi.uzh.ch/datasets/DSEC/$SEQ/lidar/velodyne.bag"
 ```
+
+## Install
+
+1. Clone
+
+```bash
+git clone git@github.com:uzh-rpg/DSEC.git
+```
+
+2. Install conda environment
+```bash
+conda create -y -n dsec python=3.8
+conda activate dsec
+conda install -y -c numba numba
+conda install -y -c conda-forge h5py numpy pytables scikit-video tqdm
+```
+
+## Script Overview
+- [Visualization of events](scripts/visualization/README.md)
