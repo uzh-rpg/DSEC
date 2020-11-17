@@ -55,7 +55,7 @@ git clone git@github.com:uzh-rpg/DSEC.git
 
 2. Install conda environment
 ```bash
-conda create -y -n dsec python=3.8
+conda create -n dsec python=3.8
 conda activate dsec
 conda install -y -c numba numba
 conda install -y -c conda-forge h5py numpy pytables scikit-video tqdm
