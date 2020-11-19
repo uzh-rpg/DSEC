@@ -28,7 +28,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser('Visualize Events')
     parser.add_argument('event_file', type=str, help='Path to events.h5 file')
     parser.add_argument('output_file', help='Path to write video file')
-    parser.add_argument('-dt', '--delta_time_ms', type=float, default=50.0, help='Time window (in milliseconds) to summarize events for visualization')
+    parser.add_argument('--delta_time_ms', '-dt_ms', type=float, default=50.0, help='Time window (in milliseconds) to summarize events for visualization')
     args = parser.parse_args()
 
     event_filepath = Path(args.event_file)
@@ -40,11 +40,12 @@ if __name__ == '__main__':
 
     assert video_filepath.parent.is_dir(), "Directory {} does not exist".format(str(video_filepath.parent))
 
-    with skvideo.io.FFmpegWriter(video_filepath) as writer:
-        for events in tqdm(EventReader(event_filepath, dt)):
-            p = events['p']
-            x = events['x']
-            y = events['y']
-            t = events['t']
-            img = render(x, y, p, height, width)
-            writer.writeFrame(img)
+    writer = skvideo.io.FFmpegWriter(video_filepath)
+    for events in tqdm(EventReader(event_filepath, dt)):
+        p = events['p']
+        x = events['x']
+        y = events['y']
+        t = events['t']
+        img = render(x, y, p, height, width)
+        writer.writeFrame(img)
+    writer.close()

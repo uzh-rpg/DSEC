@@ -4,7 +4,7 @@ import weakref
 import h5py
 from tqdm import tqdm
 
-from helpers import EventSlicer
+from eventslicer import EventSlicer
 
 
 class EventReaderAbstract:
