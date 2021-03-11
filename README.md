@@ -12,8 +12,6 @@ Visit the [project webpage](http://rpg.ifi.uzh.ch/dsec.html) to download the dat
 **Announcements**
 - 11.03.2021: The dataset is now public on <http://rpg.ifi.uzh.ch/dsec.html>. Simplified download instructions will be made available in the upcoming days.
 
-```
-
 ## Install
 
 1. Clone
