@@ -4,7 +4,7 @@ from typing import Dict, Tuple
 import h5py
 from numba import jit
 import numpy as np
-import tables as tb
+
 
 class EventSlicer:
     def __init__(self, h5f: h5py.File):
@@ -30,24 +30,30 @@ class EventSlicer:
         #       0       2       2       3       3       3       5       5       8       9
         self.ms_to_idx = np.asarray(self.h5f['ms_to_idx'], dtype='int64')
 
-        self.t_final = int(self.events['t'][-1])
+        self.t_offset = int(h5f['t_offset'][()])
+        self.t_final = int(self.events['t'][-1]) + self.t_offset
+
+    def get_start_time_us(self):
+        return self.t_offset
 
     def get_final_time_us(self):
         return self.t_final
 
     def get_events(self, t_start_us: int, t_end_us: int) -> Dict[str, np.ndarray]:
         """Get events (p, x, y, t) within the specified time window
-
         Parameters
         ----------
         t_start_us: start time in microseconds
         t_end_us: end time in microseconds
-
         Returns
         -------
         events: dictionary of (p, x, y, t) or None if the time window cannot be retrieved
         """
         assert t_start_us < t_end_us
+
+        # We assume that the times are top-off-day, hence subtract offset:
+        t_start_us -= self.t_offset
+        t_end_us -= self.t_offset
 
         t_start_ms, t_end_ms = self.get_conservative_window_ms(t_start_us, t_end_us)
         t_start_ms_idx = self.ms2idx(t_start_ms)
@@ -62,7 +68,8 @@ class EventSlicer:
         idx_start_offset, idx_end_offset = self.get_time_indices_offsets(time_array_conservative, t_start_us, t_end_us)
         t_start_us_idx = t_start_ms_idx + idx_start_offset
         t_end_us_idx = t_start_ms_idx + idx_end_offset
-        events['t'] = time_array_conservative[idx_start_offset:idx_end_offset]
+        # Again add t_offset to get gps time
+        events['t'] = time_array_conservative[idx_start_offset:idx_end_offset] + self.t_offset
         for dset_str in ['p', 'x', 'y']:
             events[dset_str] = np.asarray(self.events[dset_str][t_start_us_idx:t_end_us_idx])
             assert events[dset_str].size == events['t'].size
@@ -72,15 +79,12 @@ class EventSlicer:
     @staticmethod
     def get_conservative_window_ms(ts_start_us: int, ts_end_us) -> Tuple[int, int]:
         """Compute a conservative time window of time with millisecond resolution.
-
         We have a time to index mapping for each millisecond. Hence, we need
         to compute the lower and upper millisecond to retrieve events.
-
         Parameters
         ----------
         ts_start_us:    start time in microseconds
         ts_end_us:      end time in microseconds
-
         Returns
         -------
         window_start_ms:    conservative start time in milliseconds
@@ -98,24 +102,20 @@ class EventSlicer:
             time_start_us: int,
             time_end_us: int) -> Tuple[int, int]:
         """Compute index offset of start and end timestamps in microseconds
-
         Parameters
         ----------
         time_array:     timestamps (in us) of the events
         time_start_us:  start timestamp (in us)
         time_end_us:    end timestamp (in us)
-
         Returns
         -------
         idx_start:  Index within this array corresponding to time_start_us
         idx_end:    Index within this array corresponding to time_end_us
-
         such that (in non-edge cases)
         time_array[idx_start] >= time_start_us
         time_array[idx_end] >= time_end_us
         time_array[idx_start - 1] < time_start_us
         time_array[idx_end - 1] < time_end_us
-
         this means that
         time_start_us <= time_array[idx_start:idx_end] < time_end_us
         """

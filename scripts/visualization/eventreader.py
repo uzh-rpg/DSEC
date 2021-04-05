@@ -2,9 +2,8 @@ from pathlib import Path
 import weakref
 
 import h5py
-from tqdm import tqdm
 
-from eventslicer import EventSlicer
+from utils.eventslicer import EventSlicer
 
 
 class EventReaderAbstract:
@@ -37,16 +36,17 @@ class EventReader(EventReaderAbstract):
         self.event_slicer = EventSlicer(self.h5f)
 
         self.dt_us = int(dt_milliseconds * 1000)
-        self.t_start_us = 0
+        self.t_start_us = self.event_slicer.get_start_time_us()
+        self.t_end_us = self.event_slicer.get_final_time_us()
 
-        self._length = self.event_slicer.get_final_time_us()//self.dt_us
+        self._length = (self.t_end_us - self.t_start_us)//self.dt_us
 
     def __len__(self):
         return self._length
 
     def __next__(self):
         t_end_us = self.t_start_us + self.dt_us
-        if t_end_us > self.event_slicer.get_final_time_us():
+        if t_end_us > self.t_end_us:
             raise StopIteration
         events = self.event_slicer.get_events(self.t_start_us, t_end_us)
         if events is None:

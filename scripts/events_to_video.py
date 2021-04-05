@@ -5,7 +5,7 @@ import numpy as np
 import skvideo.io
 from tqdm import tqdm
 
-from eventreader import EventReader
+from visualization.eventreader import EventReader
 
 
 def render(x: np.ndarray, y: np.ndarray, p: np.ndarray, H: int, W: int) -> np.ndarray:
