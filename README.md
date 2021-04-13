@@ -45,6 +45,8 @@ disp[y,x]  = ((float)I[y,x])/256.0;
 valid[y,x] = I[y,x]>0;
 ```
 
+The reference view is the left event or rgb global shutter camera respectively. This is the same convention as the KITTI stereo benchmark.
+
 ### Image
 Image data is available in 8-bit PNG files and is already rectified.
 ### Events
