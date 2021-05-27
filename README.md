@@ -102,6 +102,11 @@ The following two quantities are perspective transformation matrices for [reproj
 - `cams_03`: Event cameras
 - `cams_12`: Frame cameras
 
+## Disparity Evaluation
+
+We provide a [python script](scripts/check_submission.py) to ensure that the structure of the submission directory is correct.
+Follow the instructions on the [webpage](https://dsec.ifi.uzh.ch/disparity-submission-format/) for a detailed description of the submission format.
+
 ## FAQ
 
 **Why is the groundtruth for the test set not available?**\
