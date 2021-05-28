@@ -105,6 +105,17 @@ The following two quantities are perspective transformation matrices for [reproj
 ## Disparity Evaluation
 
 We provide a [python script](scripts/check_submission.py) to ensure that the structure of the submission directory is correct.
+Usage example:
+
+```Python
+python check_submission.py SUBMISSION_DIR EVAL_DISPARITY_TIMESTAMPS_DIR
+```
+
+where `EVAL_DISPARITY_TIMESTAMPS_DIR` is the path to the unzipped directory containing evaluation timestamps. It can [downloaded on the webpage](https://dsec.ifi.uzh.ch/dsec-datasets/download/) or directly [here](https://download.ifi.uzh.ch/rpg/DSEC/test_disparity_timestamps.zip).
+`SUBMISSION_DIR` is the path to the directory containing your submission.
+
+
+
 Follow the instructions on the [webpage](https://dsec.ifi.uzh.ch/disparity-submission-format/) for a detailed description of the submission format.
 
 ## FAQ
