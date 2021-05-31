@@ -4,6 +4,7 @@ assert version[0] >= 3, 'Python 2 is not supported'
 assert version[1] >= 6, 'Requires Python 3.6 or higher'
 
 import argparse
+import os
 from pathlib import Path
 from typing import Dict
 
@@ -68,6 +69,11 @@ if __name__ ==  '__main__':
     name2num = files_per_sequence(ref_disp_ts_dir)
 
     expected_disparity_shape = (480, 640)
+
+    expected_dir_names = set([*name2num])
+    actual_dir_names = set(os.listdir(submission_dir))
+    assert expected_dir_names == actual_dir_names, f'Expected directories in your submission: {expected_dir_names}.\nMissing directories: {expected_dir_names.difference(actual_dir_names)}'
+
     for seq in submission_dir.iterdir():
         assert seq.is_dir()
         assert is_string_swiss(seq.name), seq.name
