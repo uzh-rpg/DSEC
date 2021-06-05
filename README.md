@@ -49,6 +49,11 @@ The reference view is the left event or rgb global shutter camera respectively. 
 
 ### Image
 Image data is available in 8-bit PNG files and is already rectified.
+
+Together with the images, we provide three timestamp files:
+- Exposure timestamps for both left and right camera: The start and end of the exposure time is provided in microseconds
+- Image timestamps: They are unified timestamps for both the left and right cameras and are computed as the average of the middle exposures from the left and right cameras. These timestamps are used to associate images with disparity maps.
+
 ### Events
 Event data is stored in compressed h5 files. The structure of the h5 file is the following:
 
