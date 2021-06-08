@@ -48,14 +48,14 @@ valid[y,x] = I[y,x]>0;
 The reference view is the left event or rgb global shutter camera respectively. This is the same convention as the KITTI stereo benchmark.
 
 ### Image
-Image data is available in 8-bit PNG files and is already rectified.
+Image data is available in 8-bit PNG files at a resolution of 1440x1080 and is already rectified.
 
 Together with the images, we provide three timestamp files:
 - Exposure timestamps for both left and right camera: The start and end of the exposure time is provided in microseconds
 - Image timestamps: They are unified timestamps for both the left and right cameras and are computed as the average of the middle exposures from the left and right cameras. These timestamps are used to associate images with disparity maps.
 
 ### Events
-Event data is stored in compressed h5 files. The structure of the h5 file is the following:
+Event data is stored at VGA resolution (640x480) in compressed h5 files. The structure of the h5 file is the following:
 
 ```
 /events/p
