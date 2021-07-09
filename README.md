@@ -9,6 +9,18 @@ DSEC is a hybrid stereo event camera and video camera dataset in driving scenari
 
 Visit the [project webpage](https://dsec.ifi.uzh.ch/) to download the dataset.
 
+If you use this code in an academic context, please cite the following work:
+
+```bibtex
+@InProceedings{Gehrig21ral,
+  author  = {Mathias Gehrig and Willem Aarents and Daniel Gehrig and Davide Scaramuzza},
+  title   = {DSEC: A Stereo Event Camera Dataset for Driving Scenarios},
+  journal = {IEEE Robotics and Automation Letters},
+  year    = {2021},
+  doi     = {10.1109/LRA.2021.3068942}
+}
+```
+
 ## Install
 
 1. Clone
