@@ -79,9 +79,12 @@ class Sequence(Dataset):
         self.rectify_ev_maps = dict()
         self.event_slicers = dict()
 
-        ev_dir = seq_path / 'events'
+        self.ev_dir = seq_path / 'events'
+        self.h5f_opened = False
+
+    def __open_h5f(self)
         for location in self.locations:
-            ev_dir_location = ev_dir / location
+            ev_dir_location = self.ev_dir / location
             ev_data_file = ev_dir_location / 'events.h5'
             ev_rect_file = ev_dir_location / 'rectify_map.h5'
 
@@ -91,7 +94,7 @@ class Sequence(Dataset):
             with h5py.File(str(ev_rect_file), 'r') as h5_rect:
                 self.rectify_ev_maps[location] = h5_rect['rectify_map'][()]
 
-
+        self.h5f_opened = True
         self._finalizer = weakref.finalize(self, self.close_callback, self.h5f)
 
     def events_to_voxel_grid(self, x, y, p, t, device: str='cpu'):
@@ -133,6 +136,9 @@ class Sequence(Dataset):
         return rectify_map[y, x]
 
     def __getitem__(self, index):
+        if not self.h5f_opened:
+            self.__open_h5f()
+
         ts_end = self.timestamps[index]
         # ts_start should be fine (within the window as we removed the first disparity map)
         ts_start = ts_end - self.delta_t_us
