@@ -131,11 +131,4 @@ python check_submission.py SUBMISSION_DIR EVAL_DISPARITY_TIMESTAMPS_DIR
 where `EVAL_DISPARITY_TIMESTAMPS_DIR` is the path to the unzipped directory containing evaluation timestamps. It can [downloaded on the webpage](https://dsec.ifi.uzh.ch/dsec-datasets/download/) or directly [here](https://download.ifi.uzh.ch/rpg/DSEC/test_disparity_timestamps.zip).
 `SUBMISSION_DIR` is the path to the directory containing your submission.
 
-
-
 Follow the instructions on the [webpage](https://dsec.ifi.uzh.ch/disparity-submission-format/) for a detailed description of the submission format.
-
-## FAQ
-
-**Why is the groundtruth for the test set not available?**\
-We are working on creating a public benchmark for you to submit the results.
