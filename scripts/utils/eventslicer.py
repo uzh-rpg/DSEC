@@ -30,7 +30,10 @@ class EventSlicer:
         #       0       2       2       3       3       3       5       5       8       9
         self.ms_to_idx = np.asarray(self.h5f['ms_to_idx'], dtype='int64')
 
-        self.t_offset = int(h5f['t_offset'][()])
+        if "t_offset" in list(h5f.keys()):
+            self.t_offset = int(h5f['t_offset'][()])
+        else:
+            self.t_offset = 0
         self.t_final = int(self.events['t'][-1]) + self.t_offset
 
     def get_start_time_us(self):
