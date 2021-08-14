@@ -8,16 +8,16 @@ from tqdm import tqdm
 from visualization.eventreader import EventReader
 
 
-def render(x: np.ndarray, y: np.ndarray, p: np.ndarray, H: int, W: int) -> np.ndarray:
-    assert x.size == y.size == p.size
+def render(x: np.ndarray, y: np.ndarray, pol: np.ndarray, H: int, W: int) -> np.ndarray:
+    assert x.size == y.size == pol.size
     assert H > 0
     assert W > 0
     img = np.full((H,W,3), fill_value=255,dtype='uint8')
     mask = np.zeros((H,W),dtype='int32')
-    p = p.astype('int')
-    p[p==0]=-1
-    mask1 = (x>=0)&(y>=0)&(W>=x)&(H>y)
-    mask[y[mask1],x[mask1]]=p
+    pol = pol.astype('int')
+    pol[pol==0]=-1
+    mask1 = (x>=0)&(y>=0)&(W>x)&(H>y)
+    mask[y[mask1],x[mask1]]=pol[mask1]
     img[mask==0]=[255,255,255]
     img[mask==-1]=[255,0,0]
     img[mask==1]=[0,0,255]
