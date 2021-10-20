@@ -20,6 +20,15 @@ If you use this code in an academic context, please cite the following work:
   doi     = {10.1109/LRA.2021.3068942}
 }
 ```
+and
+```bibtex
+@InProceedings{Gehrig3dv2021,
+  author = {Mathias Gehrig and Mario Millh\"ausler and Daniel Gehrig and Davide Scaramuzza},
+  title = {E-RAFT: Dense Optical Flow from Event Cameras},
+  booktitle = {International Conference on 3D Vision (3DV)},
+  year = {2021}
+}
+```
 
 ## Install
 
