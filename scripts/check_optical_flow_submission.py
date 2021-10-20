@@ -108,8 +108,6 @@ def check_submission(submission_dir: Path, flow_timestamps_dir: Path):
             flow, valid_map = load_flow(prediction, valid_in_3rd_channel=False, write_format=WriteFormat.IMAGEIO)
             assert flow.shape == expected_flow_shape, f'Expected shape: {expected_flow_shape}, actual shape: {flow.shape}'
             assert valid_map.shape == expected_valid_shape, f'Expected shape: {expected_valid_shape}, actual shape: {valid_map.shape}'
-            valid_map_uint = valid_map.astype('uint8')
-            assert valid_map_uint.max() <= 1
             num_files += 1
         assert seq.name in [*name2num], f'{seq.name} not in {[*name2num]}'
         assert num_files == name2num[seq.name], f'expected {name2num[seq.name]} files in {str(seq)} but only found {num_files} files'
