@@ -1,3 +1,7 @@
+# News
+
+**Nov. 26, 2022** - Lidar and IMU data is now available on the [download page](https://dsec.ifi.uzh.ch/dsec-datasets/download/).
+
 # DSEC
 
 <p align="center">
