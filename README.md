@@ -1,6 +1,5 @@
 # News
 
-- **Feb.6, 2023** - The DSEC webpage is currently not available due to cyberattacks against our University. I expect the situation will resolve within a few days.
 - **Nov. 26, 2022** - Lidar and IMU data is now available on the [download page](https://dsec.ifi.uzh.ch/dsec-datasets/download/).
 
 # DSEC
