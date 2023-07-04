@@ -16,9 +16,10 @@ class EventSlicer:
 
         # This is the mapping from milliseconds to event index:
         # It is defined such that
-        # (1) t[ms_to_idx[ms]] >= ms*1000
-        # (2) t[ms_to_idx[ms] - 1] < ms*1000
-        # ,where 'ms' is the time in milliseconds and 't' the event timestamps in microseconds.
+        # (1) t[ms_to_idx[ms]] >= ms*1000, for ms > 0
+        # (2) t[ms_to_idx[ms] - 1] < ms*1000, for ms > 0
+        # (3) ms_to_idx[0] == 0
+        # , where 'ms' is the time in milliseconds and 't' the event timestamps in microseconds.
         #
         # As an example, given 't' and 'ms':
         # t:    0     500    2100    5000    5000    7100    7200    7200    8100    9000
